@@ -1,1 +1,1 @@
-export * from './getAllUsers'
+export * from '@/controllers/users/getAllUsers'

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import * as Users from '../controllers/users'
+import * as Users from '@/controllers/users'
 
 const router: Router = Router()
 

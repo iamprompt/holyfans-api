@@ -1,14 +1,9 @@
-/** Express router providing user related routes
- * @module app
- * @requires express
- */
-
 import * as dotenv from 'dotenv'
 dotenv.config()
 
 import express, { Application, Request, Response } from 'express'
 
-import { RES_STATUS } from './utils/constant'
+import { RES_STATUS } from '@/utils/constant'
 
 const PORT = process.env.PORT || 3030
 
