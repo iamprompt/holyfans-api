@@ -1,12 +1,12 @@
 {
   "name": "holyfans-api",
   "version": "1.0.0",
-  "main": "dist/app.js",
+  "main": "src/app.ts",
   "repository": "https://github.com/nakama-dev/holyfans-api.git",
   "author": "wearedprompt <wearedprompt@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn build && node dist/app.js",
+    "start": "ts-node src/app.js",
     "dev": "nodemon -e ts -w src/ -x ts-node src/app.ts",
     "build": "tsc"
   },
