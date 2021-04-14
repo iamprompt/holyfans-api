@@ -6,9 +6,10 @@
   "author": "wearedprompt <wearedprompt@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/app.js",
+    "start": "node dist/app.js",
     "dev": "nodemon -e ts -w src/ -x ts-node src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "postinstall": "yarn build"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
