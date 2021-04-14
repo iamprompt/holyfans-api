@@ -1,9 +1,9 @@
 import { Router } from 'express'
-
-import * as Users from '@/controllers/users'
+import * as UsersController from '@/controllers/users'
 
 const router: Router = Router()
 
-router.get('/', Users.getAllUsers)
+router.get('/', UsersController.getAllUsers)
+router.get('/:uId', UsersController.getUserById)
 
 export default router

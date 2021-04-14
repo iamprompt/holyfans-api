@@ -7,13 +7,14 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/app.js",
-    "dev": "nodemon -e ts -w src/ -x ts-node src/app.ts",
+    "dev": "nodemon -e ts -w src/ -x ts-node -r tsconfig-paths/register src/app.ts",
     "build": "tsc",
     "postinstall": "yarn build"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "firebase-admin": "^9.6.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
@@ -26,6 +27,7 @@
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "nodemon": "^2.0.7",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "tsconfig-paths": "^3.9.0"
   }
 }
