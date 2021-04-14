@@ -6,7 +6,7 @@
   "author": "wearedprompt <wearedprompt@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "yarn build && node dist/app.js",
     "dev": "nodemon -e ts -w src/ -x ts-node src/app.ts",
     "build": "tsc"
   },
