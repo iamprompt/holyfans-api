@@ -1,6 +1,7 @@
-import { FIREBASE_CONST } from '@/utils/constant'
+import { ACTION_TYPE, FIREBASE_CONST } from '@/utils/constant'
 import { db } from '@/utils/firebase'
 import { IUser } from '@/utils/types'
+import { firestore } from 'firebase-admin'
 
 export const usersRef = db.collection(FIREBASE_CONST.USERS_COLLECTION)
 
@@ -62,7 +63,16 @@ export const addUser = async (userData: Partial<IUser>) => {
   try {
     // Find if the user already have account
     if (!(await getUsersByEmail(userData.email))) {
-      const resUser = await usersRef.add(userData) // Add data to collection
+      const resUser = await usersRef.add({
+        ...userData,
+        dateCreated: firestore.Timestamp.now(),
+        dateModified: firestore.Timestamp.now(),
+      }) // Add data to collection
+
+      await resUser.collection(FIREBASE_CONST.LOG_SUB_COLLECTION).add({
+        action: ACTION_TYPE.CREATE_ACC,
+        time: firestore.Timestamp.now(),
+      })
       return {
         id: resUser.id,
         ...(await resUser.get()).data(),

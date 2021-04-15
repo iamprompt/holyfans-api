@@ -1,7 +1,15 @@
 import * as Auth from '@/models/auth'
-import { JWT_SECRET, RES_STATUS } from '@/utils/constant'
+import { usersRef } from '@/models/users'
+import {
+  ACTION_TYPE,
+  FIREBASE_CONST,
+  JWT_SECRET,
+  RES_STATUS,
+} from '@/utils/constant'
+import { db } from '@/utils/firebase'
 import { ILoginInfo } from '@/utils/types'
 import { NextFunction, Request, Response } from 'express'
+import { firestore } from 'firebase-admin'
 import jwt from 'jsonwebtoken'
 
 export const getUserLogin = async (req: Request, res: Response) => {
@@ -13,6 +21,11 @@ export const getUserLogin = async (req: Request, res: Response) => {
       loginInfo.email,
       loginInfo.password,
     )
+
+    await usersRef
+      .doc(response.id)
+      .collection(FIREBASE_CONST.LOG_SUB_COLLECTION)
+      .add({ action: ACTION_TYPE.LOGIN, time: firestore.Timestamp.now() })
 
     const token = await Auth.generateUserToken(response)
     return res
