@@ -53,6 +53,16 @@ router.get('/', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
 router.post('/', UsersController.createUsers)
 
 /**
+ * DELETE /users
+ * @description Delete the user
+ * Body: <application/json>
+ * {
+ *   "uid": "TRqMnlm2GKTzjuEwNcah"
+ * }
+ */
+router.delete('/', UsersController.deleteUser)
+
+/**
  * GET /users/search?search_keyword=
  * @description Search users by keywords (Optional)
  * Body: None

@@ -106,3 +106,12 @@ export const searchUser = async (searchKey: string) => {
 
   return filteredUsers
 }
+
+export const deleteUsersById = async (uId: string) => {
+  try {
+    const usersSnapshot = await usersRef.doc(uId).delete()
+    return usersSnapshot
+  } catch (error) {
+    return error.message
+  }
+}
