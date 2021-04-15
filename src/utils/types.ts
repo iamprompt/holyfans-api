@@ -1,7 +1,7 @@
 import admin from 'firebase-admin'
 
-export type users = {
-  _id: string
+export type IUser = {
+  id: string
   role: 'admin' | 'creator' | 'user'
   firstName: string
   lastName: string
@@ -13,4 +13,9 @@ export type users = {
   password: string
   dateCreated: admin.firestore.Timestamp
   dateModified: admin.firestore.Timestamp
+}
+
+export type ILoginInfo = {
+  email: string
+  password: string
 }
