@@ -92,7 +92,6 @@ export const addUser = async (userData: Partial<IUser>) => {
 export const searchUser = async (searchKey: string) => {
   const searchRegExp = new RegExp(searchKey)
   const allUsers = await getAllUsers()
-  console.log(allUsers)
 
   const filteredUsers = await Promise.all(
     allUsers.filter((u) => {
@@ -104,7 +103,6 @@ export const searchUser = async (searchKey: string) => {
       )
     }),
   )
-  console.log(filteredUsers)
 
   return filteredUsers
 }
