@@ -6,7 +6,6 @@ import {
   JWT_SECRET,
   RES_STATUS,
 } from '@/utils/constant'
-import { db } from '@/utils/firebase'
 import { ILoginInfo } from '@/utils/types'
 import { NextFunction, Request, Response } from 'express'
 import { firestore } from 'firebase-admin'

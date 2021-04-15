@@ -7,10 +7,22 @@ const router: Router = Router()
 
 router.use(verifyUserToken)
 
+/**
+ * GET /users
+ * @description Get All users in the system (Require Admin Privillege)
+ */
 router.get('/', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
-router.get('/get', UsersController.getUser)
-router.get('/:uId', UsersController.getUserById)
 
+/**
+ * POST /users
+ * @description Create a new user from the data provided. This will also generate the uId for a user
+ */
 router.post('/', UsersController.createUsers)
+
+/**
+ * GET /users/search?search_keyword=
+ * @description Search users by keywords (Optional)
+ */
+router.get('/search', UsersController.searchUser)
 
 export default router

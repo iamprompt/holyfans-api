@@ -56,3 +56,13 @@ export const createUsers = async (req: Request, res: Response) => {
       .json({ status: RES_STATUS.ERROR, payload: error.message })
   }
 }
+
+export const searchUser = async (req: Request, res: Response) => {
+  const searchParams = req.query.search_keyword as string
+  return res
+    .status(200)
+    .json({
+      status: RES_STATUS.SUCCESS,
+      payload: await Users.searchUser(searchParams),
+    })
+}
