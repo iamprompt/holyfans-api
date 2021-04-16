@@ -1,7 +1,7 @@
+import { deleteDocWithSubCollection, logToFirestore } from '@/utils'
 import { ACTION_TYPE, FIREBASE_CONST } from '@/utils/constant'
-import { db } from '@/utils/firebase'
+import { db, _db } from '@/utils/firebase'
 import { IUser } from '@/utils/types'
-import { firestore } from 'firebase-admin'
 
 export const usersRef = db.collection(FIREBASE_CONST.USERS_COLLECTION)
 
@@ -12,7 +12,9 @@ export const getAllUsers = async () => {
   const usersSnapshot = await usersRef.get()
   const data = await Promise.all(
     usersSnapshot.docs.map((u) => {
-      return { id: u.id, ...u.data() } as Partial<IUser>
+      const d = u.data()
+      delete d.password
+      return { id: u.id, ...d } as Partial<IUser>
     }),
   )
   return data as Partial<IUser>[]
@@ -38,15 +40,13 @@ export const getUsersById = async (uId: string) => {
 /**
  * Get User by Email
  * @param email Email of the account
- * @returns Data of the user with email provided
+ * @returns Data of user with id
  */
 export const getUsersByEmail = async (email: string) => {
-  const usersSnapshot = await usersRef.where('email', '==', email).get()
+  const usersSnapshot = await usersRef.where('email', '==', email).get() // account with the provided email snapshot
+  if (usersSnapshot.empty) return null // Return null, if there are no account with the provided email
 
-  if (usersSnapshot.empty) return null
-
-  const u = usersSnapshot.docs[0].data() as IUser
-  console.log(u)
+  const u = usersSnapshot.docs[0].data() as IUser // Data of a user
 
   return {
     id: usersSnapshot.docs[0].id,
@@ -63,17 +63,16 @@ export const addUser = async (userData: Partial<IUser>) => {
   try {
     // Find if the user already have account
     if (!(await getUsersByEmail(userData.email))) {
+      // Add data to collection
       const resUser = await usersRef.add({
         ...userData,
-        dateCreated: firestore.Timestamp.now(),
-        dateModified: firestore.Timestamp.now(),
+        dateCreated: _db.FieldValue.serverTimestamp(),
+        dateModified: _db.FieldValue.serverTimestamp(),
         isActive: true,
-      }) // Add data to collection
-
-      await resUser.collection(FIREBASE_CONST.LOG_SUB_COLLECTION).add({
-        action: ACTION_TYPE.CREATE_ACC,
-        time: firestore.Timestamp.now(),
       })
+
+      logToFirestore(resUser, ACTION_TYPE.CREATE_ACC)
+
       return {
         id: resUser.id,
         ...(await resUser.get()).data(),
@@ -91,7 +90,7 @@ export const addUser = async (userData: Partial<IUser>) => {
  * @returns The result from searching
  */
 export const searchUser = async (searchKey: string) => {
-  const searchRegExp = new RegExp(searchKey)
+  const searchRegExp = new RegExp(searchKey, 'i')
   const allUsers = await getAllUsers()
 
   const filteredUsers = await Promise.all(
@@ -108,11 +107,26 @@ export const searchUser = async (searchKey: string) => {
   return filteredUsers
 }
 
-export const deleteUsersById = async (uId: string) => {
+export const deleteUsersById = async (uId: string, actionById: string) => {
   try {
-    const usersSnapshot = await usersRef.doc(uId).delete()
-    return usersSnapshot
+    const resDel = await deleteDocWithSubCollection(usersRef.doc(uId))
+    logToFirestore(usersRef.doc(actionById), `Delete Account ${uId}`)
+    return resDel
   } catch (error) {
     return error.message
+  }
+}
+
+export const updateUser = async (uId: string, data: Partial<IUser>) => {
+  try {
+    const dataUpdate = {
+      ...data,
+      dateModified: _db.FieldValue.serverTimestamp(),
+    } as Partial<IUser>
+    const userDocRef = db.collection(FIREBASE_CONST.USERS_COLLECTION).doc(uId)
+    const resUpdate = await userDocRef.update(dataUpdate)
+    return resUpdate
+  } catch (error) {
+    return error
   }
 }

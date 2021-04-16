@@ -14,7 +14,9 @@ router.use(verifyUserToken)
  * Response: <application/json>
  *
  */
-router.get('/', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
+router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
+
+router.get('/', UsersController.getUserById)
 
 /**
  * POST /users
@@ -51,6 +53,7 @@ router.get('/', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
  * }
  */
 router.post('/', UsersController.createUsers)
+router.put('/', UsersController.updateUser)
 
 /**
  * DELETE /users

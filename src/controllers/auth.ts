@@ -5,6 +5,7 @@ import {
   FIREBASE_CONST,
   JWT_SECRET,
   RES_STATUS,
+  USER_TYPE,
 } from '@/utils/constant'
 import { ILoginInfo } from '@/utils/types'
 import { NextFunction, Request, Response } from 'express'
@@ -12,6 +13,8 @@ import { firestore } from 'firebase-admin'
 import jwt from 'jsonwebtoken'
 
 export const getUserLogin = async (req: Request, res: Response) => {
+  console.log(req)
+
   const loginInfo = req.body as ILoginInfo
   console.log(loginInfo)
 
@@ -54,6 +57,7 @@ export const verifyUserToken = async (
       role: string
       iat: string
     }
+    req.userId = tokenUser.id
     req.userRole = tokenUser.role
     console.log(tokenUser)
 
