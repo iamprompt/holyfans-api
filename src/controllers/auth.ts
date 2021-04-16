@@ -55,6 +55,8 @@ export const verifyUserToken = async (
       iat: string
     }
     req.userRole = tokenUser.role
+    console.log(tokenUser)
+
     next()
   } catch (error) {
     return res

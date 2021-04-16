@@ -1,5 +1,5 @@
 import * as Users from '@/models/users'
-import { BCRYPT_SALT, RES_STATUS } from '@/utils/constant'
+import { BCRYPT_SALT, RES_STATUS, USER_TYPE } from '@/utils/constant'
 import { IUser } from '@/utils/types'
 import { hash } from 'bcryptjs'
 import { Request, Response } from 'express'
@@ -41,12 +41,33 @@ export const getUser = async (req: Request, res: Response) => {
 }
 
 export const createUsers = async (req: Request, res: Response) => {
-  const userData = req.body as Partial<IUser>
-  console.log(userData)
+  const u = req.body as Partial<IUser>
+  console.log(u)
+
+  const uRequestData = {
+    role: u.role || USER_TYPE.USER,
+    firstName: u.firstName,
+    lastName: u.lastName,
+    displayName: u.displayName,
+    altFirstName: u.altFirstName,
+    altLastName: u.altLastName,
+    altDisplayName: u.altDisplayName,
+    email: u.email,
+    password: await hash(u.password, BCRYPT_SALT),
+  } as Partial<IUser>
+
+  if (
+    req.userRole !== USER_TYPE.ADMIN &&
+    uRequestData.role !== USER_TYPE.USER
+  ) {
+    return res.status(403).json({
+      status: RES_STATUS.SUCCESS,
+      payload: `You don't have permission to create a user with this role`,
+    })
+  }
 
   try {
-    userData.password = await hash(userData.password, BCRYPT_SALT) // Hash user password
-    const response = await Users.addUser(userData)
+    const response = await Users.addUser(uRequestData)
     return res
       .status(200)
       .json({ status: RES_STATUS.SUCCESS, payload: response })

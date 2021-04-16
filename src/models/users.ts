@@ -67,6 +67,7 @@ export const addUser = async (userData: Partial<IUser>) => {
         ...userData,
         dateCreated: firestore.Timestamp.now(),
         dateModified: firestore.Timestamp.now(),
+        isActive: true,
       }) // Add data to collection
 
       await resUser.collection(FIREBASE_CONST.LOG_SUB_COLLECTION).add({
