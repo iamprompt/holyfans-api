@@ -13,8 +13,6 @@ import { firestore } from 'firebase-admin'
 import jwt from 'jsonwebtoken'
 
 export const getUserLogin = async (req: Request, res: Response) => {
-  console.log(req)
-
   const loginInfo = req.body as ILoginInfo
   console.log(loginInfo)
 

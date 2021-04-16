@@ -3,6 +3,7 @@ import { BCRYPT_SALT, RES_STATUS, USER_TYPE } from '@/utils/constant'
 import { IUser } from '@/utils/types'
 import { hash } from 'bcryptjs'
 import { Request, Response } from 'express'
+import * as Auth from '@/models/auth'
 
 export const getAllUsers = async (req: Request, res: Response) => {
   return res
@@ -72,10 +73,11 @@ export const createUsers = async (req: Request, res: Response) => {
   }
 
   try {
-    const response = await Users.addUser(uRequestData)
+    const response = (await Users.addUser(uRequestData)) as IUser
+    const token = await Auth.generateUserToken(response)
     return res
       .status(200)
-      .json({ status: RES_STATUS.SUCCESS, payload: response })
+      .json({ status: RES_STATUS.SUCCESS, payload: { token, ...response } })
   } catch (error) {
     return res
       .status(400)
