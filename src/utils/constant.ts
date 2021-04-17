@@ -5,6 +5,7 @@ export enum RES_STATUS {
 
 export enum FIREBASE_CONST {
   USERS_COLLECTION = 'holyfans_users',
+  TELLER_COLLECTION = 'holyfans_teller',
   LOG_SUB_COLLECTION = 'log',
 }
 

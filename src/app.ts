@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3030
 
 import Users from './routes/users'
 import Auth from './routes/auth'
+import Tellers from './routes/tellers'
 
 const app: Application = express()
 app.use(express.json())
@@ -18,6 +19,7 @@ app.use(cors())
 
 app.use('/users', Users)
 app.use('/auth', Auth)
+app.use('/tellers', Tellers)
 
 app.get('/', (req: Request, res: Response) => {
   return res.json({ status: RES_STATUS.SUCCESS })
