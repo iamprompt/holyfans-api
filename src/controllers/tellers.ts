@@ -12,6 +12,25 @@ export const getAllUsers = async (req: Request, res: Response) => {
   })
 }
 
+export const getTellerById = async (req: Request, res: Response) => {
+  const {
+    body: { tId },
+  } = req
+
+  console.log(tId)
+
+  try {
+    const tellerData = await Tellers.getTellersById(tId)
+    return res
+      .status(200)
+      .json({ status: RES_STATUS.SUCCESS, payload: tellerData })
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ status: RES_STATUS.ERROR, payload: error.message })
+  }
+}
+
 export const searchTellers = async (req: Request, res: Response) => {
   const { query } = req
   const searchRequest = {

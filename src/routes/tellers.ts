@@ -5,7 +5,8 @@ import { USER_TYPE } from '@/utils/constant'
 
 const router: Router = Router()
 
-router.get('/', TellersController.getAllUsers)
+router.get('/', TellersController.getTellerById)
+router.get('/all', TellersController.getAllUsers)
 
 router.get('/search', TellersController.searchTellers)
 

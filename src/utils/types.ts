@@ -50,3 +50,9 @@ export type ITellerSearchRequest = {
   area?: string
   price_range?: string
 }
+
+export type ITellerPost = {
+  img?: string
+  content?: string
+  dateCreated?: admin.firestore.Timestamp
+}

@@ -7,6 +7,7 @@ export enum FIREBASE_CONST {
   USERS_COLLECTION = 'holyfans_users',
   TELLER_COLLECTION = 'holyfans_teller',
   LOG_SUB_COLLECTION = 'log',
+  POST_SUB_COLLECTION = 'posts',
 }
 
 export enum USER_TYPE {
