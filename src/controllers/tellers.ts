@@ -14,13 +14,13 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getTellerById = async (req: Request, res: Response) => {
   const {
-    body: { tId },
+    query: { tId },
   } = req
 
   console.log(tId)
 
   try {
-    const tellerData = await Tellers.getTellersById(tId)
+    const tellerData = await Tellers.getTellersById(tId as string)
     return res
       .status(200)
       .json({ status: RES_STATUS.SUCCESS, payload: tellerData })
@@ -90,10 +90,10 @@ export const updateTeller = async (req: Request, res: Response) => {
 }
 
 export const deleteTellers = async (req: Request, res: Response) => {
-  const { tId } = req.body
+  const { tId } = req.query
 
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
-    payload: await Tellers.deleteTellersById(tId, req.userId),
+    payload: await Tellers.deleteTellersById(tId as string, req.userId),
   })
 }
