@@ -51,6 +51,9 @@ const router: Router = Router()
  *   }
  * }
  */
+// Get Teller information by ID
+// Test Case 1
+//
 router.get('/', TellersController.getTellerById)
 
 /**
