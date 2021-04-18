@@ -20,7 +20,7 @@ const router: Router = Router()
 // URL: /auth/login
 // body: raw JSON
 // {
-//   "email": "testadmin@gmail.com",
+//   "email": "testadmin@holyfans.com",
 //   "password": "12345678"
 // }
 
@@ -29,7 +29,7 @@ const router: Router = Router()
 // URL: /auth/login
 // body: raw JSON
 // {
-//   "email": "testuser@gmail.com",
+//   "email": "testuser@holyfans.com",
 //   "password": "12345678"
 // }
 router.post('/login', AuthController.getUserLogin)
@@ -47,14 +47,14 @@ router.post('/login', AuthController.getUserLogin)
 
 // Add log that the user has logout (The logout action is to remove token from the frontend localstorage)
 
-// Test Case 1
+// Test Case 1 (Admin)
 // method: POST
-// Authorization: Bearer ...JWT from USER login...
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTg3NjU3MTN9.wQTxDykyDu7R6PFJr9dWAtMFEnmTbyLDudJfuRu7Iwo
 // URL: /auth/logout
 
-// Test Case 2
+// Test Case 2 (User)
 // method: POST
-// Authorization: Bearer ...JWT from ADMIN login...
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5tTGt2bkdsNkhTdlNOaXFRbVhjIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTg3NjU3NDR9.JWmRhUbCkPVAgArbR6R0dxj-07O9NKBJs-hKE7_DW4A
 // URL: /auth/logout
 router.post('/logout', AuthController.verifyUserToken, AuthController.logout)
 
