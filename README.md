@@ -280,7 +280,7 @@ This function will delete the JWT token of a user from the website.
 }
 ```
 
-#### Endpoint : DELETE `/tellers?tId=`
+#### Endpoint : DELETE `/tellers?tId=...`
 
 ```JSON
 // Authorization : JWT token from login (Requires admin privilege)
@@ -314,7 +314,7 @@ This function will delete the JWT token of a user from the website.
 }
 ```
 
-#### Endpoint : GET `/users?tId=...`
+#### Endpoint : GET `/users?uId=...`
 
 ```JSON
 // Body : None
@@ -390,7 +390,7 @@ This function will delete the JWT token of a user from the website.
 }
 ```
 
-#### Endpoint : DELETE `/users?uId=`
+#### Endpoint : DELETE `/users?uId=...`
 
 ```JSON
 // Authorization : JWT token from login (Requires admin privilege)
