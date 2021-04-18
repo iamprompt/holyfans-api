@@ -243,7 +243,7 @@ router.delete(
 router.get('/all', TellersController.getAllTellers)
 
 /**
- * GET /tellers/all
+ * GET /tellers/search?search_keyword=...&categories=...&area=...&price_range=...
  * @description Search users by keywords and other criterias
  * Body: None
  * Response: <application/json>
