@@ -126,6 +126,7 @@ router.get('/', TellersController.getTellerById)
 
 // Test Case 1
 // method: POST
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -152,6 +153,7 @@ router.get('/', TellersController.getTellerById)
 
 // Test Case 2
 // method: POST
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -242,6 +244,7 @@ router.post(
 
 // Test Case 1
 // method: PUT
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -266,6 +269,7 @@ router.post(
 
 // Test Case 2
 // method: PUT
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -315,10 +319,12 @@ router.put(
 
 // Test Case 1
 // Method: DELETE
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers?tId=Gw1jaXbRo98vXuA1XmZj
 
 // Test Case 2
 // Method: DELETE
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers?tId=VGvFnjvtMvpFgUREjpPI
 router.delete(
   '/',

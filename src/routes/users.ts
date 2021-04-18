@@ -44,13 +44,16 @@ router.use(verifyUserToken)
 
 // *** Bearer Token of Admin need to provide in order to work ***
 // GET User by ID
+
 // Test Case 1
 // Method: GET
-// URL: /users?uId=i6MlbWXozwl5KzvC2jA0
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
+// URL: /users?uId=nmLkvnGl6HSvSNiqQmXc
 
 // Test Case 2
 // Method: GET
-// URL: /users?uId=2S0xDIsDLXgwP09e44io
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
+// URL: /users?uId=RKqN5zx2JDmPOyYabrjW
 router.get('/', UsersController.getUserById)
 
 /**
@@ -93,6 +96,7 @@ router.get('/', UsersController.getUserById)
 
 // Test Case 1
 // method: POST
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /users
 // body: raw JSON
 // {
@@ -105,6 +109,7 @@ router.get('/', UsersController.getUserById)
 
 // Test Case 2
 // method: POST
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /users
 // body: raw JSON
 // {
@@ -145,25 +150,26 @@ router.post('/', UsersController.createUsers)
 
 // Test Case 1
 // method: PUT
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /users
 // body: raw JSON
 // {
-//   "id": "HtlvQXu9nBhHH5kyNKeV",
+//   "id": "RKqN5zx2JDmPOyYabrjW",
 //   "role": "admin",
-//   "firstName": "Supakarn",
-//   "lastName": "Laorattanakul",
-//   "displayName": "Promptu",
+//   "firstName": "TestAdmin",
+//   "lastName": "SuperHolyfans"
 // }
 
 // Test Case 2
 // method: PUT
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /users
 // body: raw JSON
 // {
-//   "id": "2S0xDIsDLXgwP09e44io",
-//   "firstName": "Veerakit",
-//   "lastName": "Prasertpol",
-//   "displayName": "pete",
+//   "id": "nmLkvnGl6HSvSNiqQmXc",
+//   "role": "user",
+//   "firstName": "UnitTester",
+//   "lastName": "MegaHolyfans"
 // }
 router.put('/', UsersController.updateUser)
 
@@ -189,11 +195,13 @@ router.put('/', UsersController.updateUser)
 
 // Test Case 1
 // Method: DELETE
-// URL: /users?uId=2S0xDIsDLXgwP09e44io
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
+// URL: /users?uId=RKqN5zx2JDmPOyYabrjW
 
 // Test Case 2
 // Method: DELETE
-// URL: /users?uId=OBVQiKu8TN7pQ8aqjzoj
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
+// URL: /users?uId=nmLkvnGl6HSvSNiqQmXc
 router.delete('/', roleChecked(USER_TYPE.ADMIN), UsersController.deleteUser)
 
 /**
@@ -231,6 +239,7 @@ router.delete('/', roleChecked(USER_TYPE.ADMIN), UsersController.deleteUser)
 
 // Test case 1
 // Method: GET
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /users/all
 router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
 
@@ -269,11 +278,13 @@ router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
 
 // Test Case 1
 // Method: GET
-// URL: /users/search?search_keyword=vee
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
+// URL: /users/search?search_keyword=sup
 
 // Test Case 2
 // Method: GET
-// URL: /users/search?search_keyword=prom
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
+// URL: /users/search?search_keyword=test
 router.get('/search', roleChecked(USER_TYPE.ADMIN), UsersController.searchUser)
 
 export default router
