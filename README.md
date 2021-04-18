@@ -112,7 +112,7 @@ We separated in to 3 route:
 
 ### Route `/auth`
 
-#### Endpoint : `/auth/login`
+#### Endpoint : POST `/auth/login`
 
 **Method:** GET
 
@@ -164,7 +164,6 @@ This function will delete the JWT token of a user from the website.
 
 
 ```JSON
-// Method : POST
 // Body : <application/json>
 {
   "email": "",
@@ -176,15 +175,16 @@ This function will delete the JWT token of a user from the website.
   "status" : "success",
   "payload" : {
     "token": "/* JWT token (save for usage) */",
-    "user": {/* User Data */}
+    "user": {
+      /* User Data */
+    }
   }
 }
 ```
 
-#### Endpoint : `/auth/logout`
+#### Endpoint : POST `/auth/logout`
 
 ```JSON
-// Method : POST
 // Authorization: JWT token from login
 // Body : None
 
@@ -194,10 +194,9 @@ This function will delete the JWT token of a user from the website.
 }
 ```
 
-#### Endpoint : `/auth/register`
+#### Endpoint : POST `/auth/register`
 
 ```JSON
-// Method : POST
 // Body : <application/json>
 {
   "firstName": "",
@@ -210,7 +209,245 @@ This function will delete the JWT token of a user from the website.
   "status": "success",
   "payload": {
     "token": "/* JWT token (save for usage) */",
-    {/* User Data */}
+    /* User Data */
+  }
+}
+```
+
+### Route `/tellers`
+
+#### Endpoint : GET `/tellers/all`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": [{
+    /* Teller Data */
+  }]
+}
+```
+
+#### Endpoint : GET `/tellers?tId=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* Teller Data with posts data */
+  }
+}
+```
+
+#### Endpoint : GET `/tellers/search?search_keyword=...&categories=...&area=...&price_range=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": [{
+    /* Teller Data */
+  }]
+}
+```
+
+#### Endpoint : POST `/tellers`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "nameTH": "",
+  "nameEN": "",
+  "bio": "",
+  "img": "",
+  "region": "",
+  "subPrice": ,
+  "category": [""],
+  "contact": {
+    "instagram": ""
+  },
+  "address": {
+    "_latitude": ,
+    "_longitude":
+  }
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* Teller Data */
+  }
+}
+```
+
+#### Endpoint : PUT `/tellers`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "id": "",
+  "nameTH": "",
+  "nameEN": "",
+  "img": "",
+  "bio": "",
+  "subPrice": ,
+  "region": "",
+  "category": [""],
+  "contact": {
+    "instagram": ""
+  },
+  "address": {
+    "_latitude": ,
+    "_longitude":
+  }
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+#### Endpoint : DELETE `/tellers?tId=`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+### Route `/users`
+
+#### Endpoint : GET `/users/all`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": [{
+    /* User Data */
+  }]
+}
+```
+
+#### Endpoint : GET `/users?tId=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* User Data */
+  }
+}
+```
+
+#### Endpoint : GET `/users/search?search_keyword=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": [{
+    /* User Data */
+  }]
+}
+```
+
+#### Endpoint : POST `/users`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "role": "",
+  "firstName": "",
+  "lastName": "",
+  "displayName": "",
+  "email": ""
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* User Data */
+  }
+}
+```
+
+#### Endpoint : PUT `/users`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "id": "",
+  "role": "",
+  "firstName": "",
+  "lastName": "",
+  "displayName": "",
+  "email": ""
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+#### Endpoint : DELETE `/users?uId=`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
   }
 }
 ```

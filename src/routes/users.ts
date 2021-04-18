@@ -43,7 +43,7 @@ router.use(verifyUserToken)
  */
 
 // *** Bearer Token of Admin need to provide in order to work ***
-// GET User by ID 
+// GET User by ID
 // Test Case 1
 // Method: GET
 // URL: /users?uId=i6MlbWXozwl5KzvC2jA0
@@ -89,19 +89,19 @@ router.get('/', UsersController.getUserById)
  * }
  */
 
-// POST Create User 
+// POST Create User
 
 // Test Case 1
 // method: POST
 // URL: /users
 // body: raw JSON
 // {
-//   "role": "user",
+//   "role": "admin",
 //   "firstName": "Wudhichart",
 //   "lastName": "Sawangphol",
 //   "email": "wudhichart.saw@gmail.com",
 //   "password": "9999999999"
-// } 
+// }
 
 // Test Case 2
 // method: POST
@@ -141,7 +141,7 @@ router.post('/', UsersController.createUsers)
  * }
  */
 
-// PUT Update User 
+// PUT Update User
 
 // Test Case 1
 // method: PUT
@@ -185,7 +185,7 @@ router.put('/', UsersController.updateUser)
  */
 
 // *** Bearer Token of Admin need to provide in order to work ***
-// DEL Delete User 
+// DEL Delete User
 
 // Test Case 1
 // Method: DELETE
@@ -227,7 +227,7 @@ router.delete('/', roleChecked(USER_TYPE.ADMIN), UsersController.deleteUser)
  */
 
 // *** Bearer Token of Admin need to provide in order to work ***
-// GET All Users 
+// GET All Users
 
 // Test case 1
 // Method: GET
@@ -265,7 +265,7 @@ router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
  */
 
 // *** Bearer Token of Admin need to provide in order to work ***
-// GET Search Users 
+// GET Search Users
 
 // Test Case 1
 // Method: GET

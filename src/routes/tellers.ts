@@ -140,7 +140,7 @@ router.get('/', TellersController.getTellerById)
 // 	"Tarot"
 // 	],
 //   "address": {
-//     "_latitude": 13.7287778701836, 
+//     "_latitude": 13.7287778701836,
 // 	"_longitude": 100.5260142160489
 // 	},
 //   "nameEN": "Prinnie",
@@ -157,7 +157,7 @@ router.get('/', TellersController.getTellerById)
 // {
 //   "contact": {
 //     "instagram": "sinsaeming_ig",
-// 	"email": "arjanjackyming@gmail.com",
+// 	   "email": "arjanjackyming@gmail.com",
 //     "facebook": "https://www.facebook.com/Arjan.Jacky.Ming/",
 //   },
 //   "nameTH": "ซินแสหมิง",
@@ -238,7 +238,7 @@ router.post(
  * }
  */
 
-// PUT Update Tellers 
+// PUT Update Tellers
 
 // Test Case 1
 // method: PUT
@@ -311,7 +311,7 @@ router.put(
  */
 
 // *** Bearer Token of Admin need to provide in order to work ***
-// DEL Delete Tellers 
+// DEL Delete Tellers
 
 // Test Case 1
 // Method: DELETE
