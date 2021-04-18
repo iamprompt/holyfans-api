@@ -126,6 +126,7 @@ router.get('/', TellersController.getTellerById)
 
 // Test Case 1
 // method: POST
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -133,14 +134,14 @@ router.get('/', TellersController.getTellerById)
 // 	"instagram": "prinnie333",
 // 	"website": "https://prinnie333.com/",
 // 	"youtube": "Prinnie333 Isaria",
-// 	"facebook": "https://www.facebook.com/Prinnie1221/",
+// 	"facebook": "https://www.facebook.com/Prinnie1221/"
 // 	},
 //   "nameTH": "ปรินนี่",
 //   "category": [
 // 	"Tarot"
 // 	],
 //   "address": {
-//     "_latitude": 13.7287778701836, 
+//     "_latitude": 13.7287778701836,
 // 	"_longitude": 100.5260142160489
 // 	},
 //   "nameEN": "Prinnie",
@@ -152,13 +153,14 @@ router.get('/', TellersController.getTellerById)
 
 // Test Case 2
 // method: POST
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
 //   "contact": {
 //     "instagram": "sinsaeming_ig",
-// 	"email": "arjanjackyming@gmail.com",
-//     "facebook": "https://www.facebook.com/Arjan.Jacky.Ming/",
+// 	   "email": "arjanjackyming@gmail.com",
+//     "facebook": "https://www.facebook.com/Arjan.Jacky.Ming/"
 //   },
 //   "nameTH": "ซินแสหมิง",
 //   "category": [
@@ -238,10 +240,11 @@ router.post(
  * }
  */
 
-// PUT Update Tellers 
+// PUT Update Tellers
 
 // Test Case 1
 // method: PUT
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -266,6 +269,7 @@ router.post(
 
 // Test Case 2
 // method: PUT
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers
 // body: raw JSON
 // {
@@ -311,14 +315,16 @@ router.put(
  */
 
 // *** Bearer Token of Admin need to provide in order to work ***
-// DEL Delete Tellers 
+// DEL Delete Tellers
 
 // Test Case 1
 // Method: DELETE
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers?tId=Gw1jaXbRo98vXuA1XmZj
 
 // Test Case 2
 // Method: DELETE
+// Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlJLcU41engySkRtUE95WWFicmpXIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE4NzY5NjM4fQ.qTVCdEgvrMegv4tIL8g0gyTDlguxMbV3qt2954gq2qE
 // URL: /tellers?tId=VGvFnjvtMvpFgUREjpPI
 router.delete(
   '/',
