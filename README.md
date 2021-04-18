@@ -275,7 +275,27 @@ We separated in to 3 route:
 }
 ```
 
-#### Endpoint : GET `/tellers/search?search_keyword=...&categories=...&area=...&price_range=...`
+#### Endpoint : DELETE `/tellers?tId=`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+### Route `/users`
+
+#### Endpoint : GET `/users/all`
 
 ```JSON
 // Body : None
@@ -284,12 +304,88 @@ We separated in to 3 route:
 {
   "status": "success",
   "payload": [{
-    /* Teller Data */
+    /* User Data */
   }]
 }
 ```
 
-#### Endpoint : DELETE `/tellers?tId=`
+#### Endpoint : GET `/users?tId=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* User Data */
+  }
+}
+```
+
+#### Endpoint : GET `/users/search?search_keyword=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": [{
+    /* User Data */
+  }]
+}
+```
+
+#### Endpoint : POST `/users`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "role": "",
+  "firstName": "",
+  "lastName": "",
+  "displayName": "",
+  "email": ""
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* User Data */
+  }
+}
+```
+
+#### Endpoint : PUT `/users`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "id": "",
+  "role": "",
+  "firstName": "",
+  "lastName": "",
+  "displayName": "",
+  "email": ""
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+#### Endpoint : DELETE `/users?uId=`
 
 ```JSON
 // Authorization : JWT token from login (Requires admin privilege)
