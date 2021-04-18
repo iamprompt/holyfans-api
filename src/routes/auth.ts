@@ -1,4 +1,4 @@
-// Holy Tellers
+// Holy Teller s
 // https://holyfans-api.herokuapp.com/
 // ==================================================================
 // To use get function, user need log in as 'admin'

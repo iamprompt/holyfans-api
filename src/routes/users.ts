@@ -1,4 +1,4 @@
-// Holy Tellers
+// Holy Teller s
 // https://holyfans-api.herokuapp.com/
 // ==================================================================
 // To perform users operation, user need log in as 'admin'
