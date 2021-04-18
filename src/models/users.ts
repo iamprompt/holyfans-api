@@ -7,6 +7,7 @@ export const usersRef = db.collection(FIREBASE_CONST.USERS_COLLECTION)
 
 /**
  * Get All User from Collection
+ * @returns
  */
 export const getAllUsers = async () => {
   const usersSnapshot = await usersRef.get()
@@ -107,6 +108,12 @@ export const searchUser = async (searchKey: string) => {
   return filteredUsers
 }
 
+/**
+ * Delete the user by id
+ * @param uId {string} Id of user that would like to delete
+ * @param actionById {string} Id of user who take an action for logging purpose
+ * @returns
+ */
 export const deleteUsersById = async (uId: string, actionById: string) => {
   try {
     const resDel = await deleteDocWithSubCollection(usersRef.doc(uId))
@@ -117,6 +124,12 @@ export const deleteUsersById = async (uId: string, actionById: string) => {
   }
 }
 
+/**
+ *
+ * @param uId {string} User id the need to update their profile
+ * @param data {Partial<IUser>} New value
+ * @returns
+ */
 export const updateUser = async (uId: string, data: Partial<IUser>) => {
   try {
     const dataUpdate = {

@@ -1,41 +1,38 @@
 import * as Auth from '@/models/auth'
 import { usersRef } from '@/models/users'
-import {
-  ACTION_TYPE,
-  FIREBASE_CONST,
-  JWT_SECRET,
-  RES_STATUS,
-  USER_TYPE,
-} from '@/utils/constant'
+import { logToFirestore } from '@/utils'
+import { ACTION_TYPE, JWT_SECRET, RES_STATUS } from '@/utils/constant'
 import { ILoginInfo } from '@/utils/types'
 import { NextFunction, Request, Response } from 'express'
-import { firestore } from 'firebase-admin'
 import jwt from 'jsonwebtoken'
 
 export const getUserLogin = async (req: Request, res: Response) => {
   const loginInfo = req.body as ILoginInfo
-  console.log(loginInfo)
 
   try {
-    const response = await Auth.getUsersByCredential(
+    const user = await Auth.getUsersByCredential(
       loginInfo.email,
       loginInfo.password,
     )
 
-    await usersRef
-      .doc(response.id)
-      .collection(FIREBASE_CONST.LOG_SUB_COLLECTION)
-      .add({ action: ACTION_TYPE.LOGIN, time: firestore.Timestamp.now() })
+    logToFirestore(usersRef.doc(user.id), ACTION_TYPE.LOGIN)
 
-    const token = await Auth.generateUserToken(response)
+    const token = await Auth.generateUserToken(user)
+
+    delete user.password
     return res
       .status(200)
-      .json({ status: RES_STATUS.SUCCESS, payload: { token } })
+      .json({ status: RES_STATUS.SUCCESS, payload: { token, user } })
   } catch (error) {
     return res
       .status(400)
       .json({ status: RES_STATUS.ERROR, payload: error.message })
   }
+}
+
+export const logout = async (req: Request, res: Response) => {
+  logToFirestore(usersRef.doc(req.userId), ACTION_TYPE.LOGOUT)
+  return res.json({ status: RES_STATUS.SUCCESS })
 }
 
 export const verifyUserToken = async (
