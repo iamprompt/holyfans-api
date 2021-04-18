@@ -32,18 +32,17 @@ export const getTellerById = async (req: Request, res: Response) => {
 }
 
 export const searchTellers = async (req: Request, res: Response) => {
-  const { query } = req
+  const {
+    query: { search_keyword, categories, area, price_range },
+  } = req
   const searchRequest = {
-    search_keyword: query.search_keyword,
-    categories: query.categories,
-    area: query.area,
-    price_range: query.price_range,
+    search_keyword,
+    categories,
+    area,
+    price_range,
   } as ITellerSearchRequest
 
   console.log(searchRequest)
-
-  // const searchParams = req.query.search_keyword as string
-  // console.log(searchParams)
 
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
@@ -90,7 +89,9 @@ export const updateTeller = async (req: Request, res: Response) => {
 }
 
 export const deleteTellers = async (req: Request, res: Response) => {
-  const { tId } = req.query
+  const {
+    query: { tId },
+  } = req
 
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,

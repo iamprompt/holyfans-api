@@ -8,14 +8,31 @@ const router: Router = Router()
 router.use(verifyUserToken)
 
 /**
- * GET /users
- * @description Get All users in the system (Require Admin Privillege)
+ * GET /user?uId=...
+ * @description Get user's data by User unique ID
  * Body: None
  * Response: <application/json>
- *
+ * {
+ *   "status": "success",
+ *   "payload": {
+ *     "id": "8PTXdqPdAf097eDFs7oO",
+ *     "role": "admin",
+ *     "displayName": "Prompt",
+ *     "isActive": true,
+ *     "firstName": "Supakarn",
+ *     "lastName": "Laorattanakul"
+ *     "email": "iamprompt@gmail.com",
+ *     "dateModified": {
+ *       "_seconds": 1618583205,
+ *       "_nanoseconds": 800000000
+ *     },
+ *     "dateCreated": {
+ *       "_seconds": 1618583205,
+ *       "_nanoseconds": 800000000
+ *     },
+ *   }
+ * }
  */
-router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
-
 router.get('/', UsersController.getUserById)
 
 /**
@@ -53,17 +70,34 @@ router.get('/', UsersController.getUserById)
  * }
  */
 router.post('/', UsersController.createUsers)
+
 router.put('/', UsersController.updateUser)
 
 /**
- * DELETE /users
- * @description Delete the user
- * Body: <application/json>
+ * DELETE /users?uId=...
+ * @description Delete the user by user ID (Require Admin Privillege)
+ * Body: None
+ * Response: <application/json>
  * {
- *   "uid": "TRqMnlm2GKTzjuEwNcah"
+ *   "status": "success",
+ *   "payload": {
+ *     "_writeTime": {
+ *         "_seconds": 1618730809,
+ *         "_nanoseconds": 553589000
+ *     }
+ *   }
  * }
  */
-router.delete('/', UsersController.deleteUser)
+router.delete('/', roleChecked(USER_TYPE.ADMIN), UsersController.deleteUser)
+
+/**
+ * GET /users/all
+ * @description Get All users in the system (Require Admin Privillege)
+ * Body: None
+ * Response: <application/json>
+ *
+ */
+router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
 
 /**
  * GET /users/search?search_keyword=

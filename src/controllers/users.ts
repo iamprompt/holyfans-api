@@ -13,13 +13,13 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const getUserById = async (req: Request, res: Response) => {
   const {
-    body: { uId },
+    query: { uId },
   } = req
 
-  console.log(uId)
+  console.log(uId as string)
 
   try {
-    const userData = await Users.getUsersById(uId)
+    const userData = await Users.getUsersById(uId as string)
     delete userData.password
     return res
       .status(200)
@@ -89,20 +89,22 @@ export const searchUser = async (req: Request, res: Response) => {
   const searchParams = req.query.search_keyword as string
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
-    payload: await Users.searchUser(searchParams),
+    payload: await Users.searchUser(searchParams as string),
   })
 }
 
 export const deleteUser = async (req: Request, res: Response) => {
-  const { uId } = req.body
-  if (uId === req.userId) {
+  const {
+    query: { uId },
+  } = req
+  if ((uId as string) === req.userId) {
     return res
       .status(400)
       .json({ status: RES_STATUS.ERROR, payload: 'You cannot delete yourself' })
   }
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
-    payload: await Users.deleteUsersById(uId, req.userId),
+    payload: await Users.deleteUsersById(uId as string, req.userId),
   })
 }
 

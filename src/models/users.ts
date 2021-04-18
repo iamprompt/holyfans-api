@@ -39,7 +39,7 @@ export const getUsersById = async (uId: string) => {
 
 /**
  * Get User by Email
- * @param email Email of the account
+ * @param email {string} Email of the account
  * @returns Data of user with id
  */
 export const getUsersByEmail = async (email: string) => {
@@ -96,10 +96,10 @@ export const searchUser = async (searchKey: string) => {
   const filteredUsers = await Promise.all(
     allUsers.filter((u) => {
       return (
-        u.firstName.match(searchRegExp) ||
-        u.lastName.match(searchRegExp) ||
-        u.displayName.match(searchRegExp) ||
-        u.email.match(searchRegExp)
+        u.firstName?.match(searchRegExp) ||
+        u.lastName?.match(searchRegExp) ||
+        u.displayName?.match(searchRegExp) ||
+        u.email?.match(searchRegExp)
       )
     }),
   )

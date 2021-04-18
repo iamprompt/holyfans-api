@@ -82,7 +82,7 @@ export const searchTellers = async (searchKey: ITellerSearchRequest) => {
   if (searchKey.search_keyword) {
     filteredTellers = await Promise.all(
       filteredTellers.filter((u) => {
-        return u.nameTH.match(searchRegExp) || u.nameEN.match(searchRegExp)
+        return u.nameTH?.match(searchRegExp) || u.nameEN?.match(searchRegExp)
       }),
     )
   }
@@ -90,7 +90,7 @@ export const searchTellers = async (searchKey: ITellerSearchRequest) => {
   if (searchKey.categories) {
     filteredTellers = await Promise.all(
       filteredTellers.filter((u) => {
-        return u.category.includes(searchKey.categories)
+        return u.category?.includes(searchKey.categories)
       }),
     )
   }
@@ -98,7 +98,7 @@ export const searchTellers = async (searchKey: ITellerSearchRequest) => {
   if (searchKey.area) {
     filteredTellers = await Promise.all(
       filteredTellers.filter((u) => {
-        return u.region.match(areaRegExp)
+        return u.region?.match(areaRegExp)
       }),
     )
   }
