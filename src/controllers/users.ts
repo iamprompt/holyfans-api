@@ -6,7 +6,7 @@ import { Request, Response } from 'express'
 import * as Auth from '@/models/auth'
 
 /**
- * Get all users (Require Admin Privillages)
+ * Get all users (Require Admin privileges)
  * @returns
  */
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -38,7 +38,7 @@ export const getUserById = async (req: Request, res: Response) => {
 }
 
 /**
- * Search Users (Require Admin Privillages)
+ * Search Users (Require Admin privileges)
  * @returns
  */
 export const searchUser = async (req: Request, res: Response) => {
@@ -149,7 +149,7 @@ export const updateUser = async (req: Request, res: Response) => {
 }
 
 /**
- * Delete User (Require Admin Privillages)
+ * Delete User (Require Admin privileges)
  * @returns
  */
 export const deleteUser = async (req: Request, res: Response) => {

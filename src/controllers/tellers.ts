@@ -57,7 +57,7 @@ export const searchTellers = async (req: Request, res: Response) => {
 }
 
 /**
- * Create Teller (Require Admin Privillages)
+ * Create Teller (Require Admin privileges)
  * @param req
  * @param res
  * @returns
@@ -77,7 +77,7 @@ export const createTeller = async (req: Request, res: Response) => {
 }
 
 /**
- * Update Tellers (Require Admin Privillages)
+ * Update Tellers (Require Admin privileges)
  * @returns
  */
 export const updateTeller = async (req: Request, res: Response) => {
@@ -103,7 +103,7 @@ export const updateTeller = async (req: Request, res: Response) => {
 }
 
 /**
- * Delete Tellers (Require Admin Privillages)
+ * Delete Tellers (Require Admin privileges)
  * @returns
  */
 export const deleteTellers = async (req: Request, res: Response) => {
