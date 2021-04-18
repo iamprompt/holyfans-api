@@ -1,23 +1,27 @@
-import { RES_STATUS, USER_TYPE } from '@/utils/constant'
+import { RES_STATUS } from '@/utils/constant'
 import { ITeller, ITellerSearchRequest } from '@/utils/types'
 import { Request, Response } from 'express'
 import * as Tellers from '@/models/tellers'
 
-export const getAllUsers = async (req: Request, res: Response) => {
-  console.log('here')
-
+/**
+ * Get All tellers
+ * @returns
+ */
+export const getAllTellers = async (req: Request, res: Response) => {
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
     payload: await Tellers.getAllTellers(),
   })
 }
 
+/**
+ * Get Teller by Id
+ * @returns
+ */
 export const getTellerById = async (req: Request, res: Response) => {
   const {
     query: { tId },
   } = req
-
-  console.log(tId)
 
   try {
     const tellerData = await Tellers.getTellersById(tId as string)
@@ -31,6 +35,10 @@ export const getTellerById = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Search Tellers
+ * @returns
+ */
 export const searchTellers = async (req: Request, res: Response) => {
   const {
     query: { search_keyword, categories, area, price_range },
@@ -42,18 +50,20 @@ export const searchTellers = async (req: Request, res: Response) => {
     price_range,
   } as ITellerSearchRequest
 
-  console.log(searchRequest)
-
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
     payload: await Tellers.searchTellers(searchRequest),
   })
 }
 
+/**
+ * Create Teller (Require Admin Privillages)
+ * @param req
+ * @param res
+ * @returns
+ */
 export const createTeller = async (req: Request, res: Response) => {
   const t = req.body as Partial<ITeller>
-  console.log(t)
-
   try {
     const response = (await Tellers.addTellers(t, req.userId)) as ITeller
     return res
@@ -66,6 +76,10 @@ export const createTeller = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Update Tellers (Require Admin Privillages)
+ * @returns
+ */
 export const updateTeller = async (req: Request, res: Response) => {
   const u = req.body as Partial<ITeller>
 
@@ -88,6 +102,10 @@ export const updateTeller = async (req: Request, res: Response) => {
   })
 }
 
+/**
+ * Delete Tellers (Require Admin Privillages)
+ * @returns
+ */
 export const deleteTellers = async (req: Request, res: Response) => {
   const {
     query: { tId },

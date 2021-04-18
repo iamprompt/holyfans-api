@@ -5,18 +5,24 @@ import { hash } from 'bcryptjs'
 import { Request, Response } from 'express'
 import * as Auth from '@/models/auth'
 
+/**
+ * Get all users (Require Admin Privillages)
+ * @returns
+ */
 export const getAllUsers = async (req: Request, res: Response) => {
   return res
     .status(200)
     .json({ status: RES_STATUS.SUCCESS, payload: await Users.getAllUsers() })
 }
 
+/**
+ * Get users by id
+ * @returns
+ */
 export const getUserById = async (req: Request, res: Response) => {
   const {
     query: { uId },
   } = req
-
-  console.log(uId as string)
 
   try {
     const userData = await Users.getUsersById(uId as string)
@@ -31,25 +37,24 @@ export const getUserById = async (req: Request, res: Response) => {
   }
 }
 
-export const getUser = async (req: Request, res: Response) => {
-  const reqData = req.body
-
-  try {
-    const userData = await Users.getUsersByEmail(reqData.email)
-    return res
-      .status(200)
-      .json({ status: RES_STATUS.SUCCESS, payload: userData })
-  } catch (error) {
-    return res
-      .status(404)
-      .json({ status: RES_STATUS.ERROR, payload: error.message })
-  }
+/**
+ * Search Users (Require Admin Privillages)
+ * @returns
+ */
+export const searchUser = async (req: Request, res: Response) => {
+  const searchParams = req.query.search_keyword as string
+  return res.status(200).json({
+    status: RES_STATUS.SUCCESS,
+    payload: await Users.searchUser(searchParams as string),
+  })
 }
 
+/**
+ * Create User
+ * @returns
+ */
 export const createUsers = async (req: Request, res: Response) => {
   const u = req.body as Partial<IUser>
-  console.log(u)
-
   const uRequestData = {
     role: u.role || USER_TYPE.USER,
     firstName: u.firstName,
@@ -86,33 +91,12 @@ export const createUsers = async (req: Request, res: Response) => {
   }
 }
 
-export const searchUser = async (req: Request, res: Response) => {
-  const searchParams = req.query.search_keyword as string
-  return res.status(200).json({
-    status: RES_STATUS.SUCCESS,
-    payload: await Users.searchUser(searchParams as string),
-  })
-}
-
-export const deleteUser = async (req: Request, res: Response) => {
-  const {
-    query: { uId },
-  } = req
-  if ((uId as string) === req.userId) {
-    return res
-      .status(400)
-      .json({ status: RES_STATUS.ERROR, payload: 'You cannot delete yourself' })
-  }
-  return res.status(200).json({
-    status: RES_STATUS.SUCCESS,
-    payload: await Users.deleteUsersById(uId as string, req.userId),
-  })
-}
-
+/**
+ * Update user
+ * @returns
+ */
 export const updateUser = async (req: Request, res: Response) => {
   const u = req.body as Partial<IUser>
-
-  console.log(u)
   if (!u.id)
     return res
       .status(400)
@@ -161,5 +145,24 @@ export const updateUser = async (req: Request, res: Response) => {
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
     payload: await Users.updateUser(u.id, uRequestData),
+  })
+}
+
+/**
+ * Delete User (Require Admin Privillages)
+ * @returns
+ */
+export const deleteUser = async (req: Request, res: Response) => {
+  const {
+    query: { uId },
+  } = req
+  if ((uId as string) === req.userId) {
+    return res
+      .status(400)
+      .json({ status: RES_STATUS.ERROR, payload: 'You cannot delete yourself' })
+  }
+  return res.status(200).json({
+    status: RES_STATUS.SUCCESS,
+    payload: await Users.deleteUsersById(uId as string, req.userId),
   })
 }

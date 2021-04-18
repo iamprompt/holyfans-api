@@ -10,25 +10,26 @@ router.use(verifyUserToken)
 /**
  * GET /user?uId=...
  * @description Get user's data by User unique ID
+ * Authorization: JWT
  * Body: None
  * Response: <application/json>
  * {
  *   "status": "success",
  *   "payload": {
- *     "id": "8PTXdqPdAf097eDFs7oO",
+ *     "id": "",
  *     "role": "admin",
- *     "displayName": "Prompt",
- *     "isActive": true,
- *     "firstName": "Supakarn",
- *     "lastName": "Laorattanakul"
- *     "email": "iamprompt@gmail.com",
+ *     "displayName": "",
+ *     "isActive": ,
+ *     "firstName": "",
+ *     "lastName": ""
+ *     "email": "",
  *     "dateModified": {
- *       "_seconds": 1618583205,
- *       "_nanoseconds": 800000000
+ *       "_seconds": ,
+ *       "_nanoseconds":
  *     },
  *     "dateCreated": {
- *       "_seconds": 1618583205,
- *       "_nanoseconds": 800000000
+ *       "_seconds": ,
+ *       "_nanoseconds":
  *     },
  *   }
  * }
@@ -38,52 +39,78 @@ router.get('/', UsersController.getUserById)
 /**
  * POST /users
  * @description Create a new user from the data provided. This will also generate the uId for a user
+ * Authorization: JWT
  * Body: <application/json>
  * {
- *   "firstName": "Supakarn",
- *   "lastName": "Laorattanakul",
- *   "displayName": "Prompt",
- *   "email": "iamprompt@gmail.com",
- *   "password": "12345678"
+ *   "role": ""
+ *   "firstName": "",
+ *   "lastName": "",
+ *   "displayName": "",
+ *   "email": "",
+ *   "password": ""
  * }
  *
  * Response: <application/json>
  * {
  *   "status": "success",
  *   "payload": {
- *     "id": "TRqMnlm2GKTzjuEwNcah",
- *     "lastName": "Laorattanakul",
- *     "role": "admin",
- *     "firstName": "Supakarn",
- *     "email": "iampromp@gmail.com",
- *     "password": "$2a$08$QlOm8J/tHu.3PpEUN0pcKurjFxcedFV1FAnyQaH9Hg2yCGs4mW.Ni",
- *     "displayName": "Prompt",
+ *     "id": "",
+ *     "lastName": "",
+ *     "role": "",
+ *     "firstName": "",
+ *     "email": "",
+ *     "displayName": "",
  *     "dateModified": {
- *       "_seconds": 1618484378,
- *       "_nanoseconds": 375000000
+ *       "_seconds": ,
+ *       "_nanoseconds":
  *     },
  *     "dateCreated": {
- *       "_seconds": 1618484378,
- *       "_nanoseconds": 375000000
+ *       "_seconds": ,
+ *       "_nanoseconds":
  *     }
  *   }
  * }
  */
 router.post('/', UsersController.createUsers)
 
+/**
+ * UPDATE /users?uId=...
+ * @description Delete the user by user ID (Require Admin Privillege)
+ * Authorization: JWT
+ * Body: <application/json>
+ * {
+ *   "id": "",
+ *   "role": "",
+ *   "firstName": "",
+ *   "lastName": "",
+ *   "displayName": "",
+ *   "email": ""
+ * }
+ * Response: <application/json>
+ * {
+ *   "status": "success",
+ *   "payload": {
+ *     "_writeTime": {
+ *         "_seconds": ,
+ *         "_nanoseconds":
+ *     }
+ *   }
+ * }
+ */
 router.put('/', UsersController.updateUser)
 
 /**
  * DELETE /users?uId=...
  * @description Delete the user by user ID (Require Admin Privillege)
+ * Authorization: JWT (Admin Required)
  * Body: None
  * Response: <application/json>
  * {
  *   "status": "success",
  *   "payload": {
  *     "_writeTime": {
- *         "_seconds": 1618730809,
- *         "_nanoseconds": 553589000
+ *         "_seconds": ,
+ *         "_nanoseconds":
  *     }
  *   }
  * }
@@ -93,17 +120,63 @@ router.delete('/', roleChecked(USER_TYPE.ADMIN), UsersController.deleteUser)
 /**
  * GET /users/all
  * @description Get All users in the system (Require Admin Privillege)
+ * Authorization: JWT (Admin Required)
  * Body: None
  * Response: <application/json>
- *
+ * {
+ *   "status": "success",
+ *   "payload": [
+ *     {
+ *       "id": "",
+ *       "firstName": "",
+ *       "isActive": ,
+ *       "role": "",
+ *       "email": "",
+ *       "dateModified": {
+ *         "_seconds": ,
+ *         "_nanoseconds":
+ *       },
+ *       "lastName": "",
+ *       "dateCreated": {
+ *         "_seconds": ,
+ *         "_nanoseconds":
+ *       }
+ *     },
+ *     ...
+ *   ]
+ * }
  */
 router.get('/all', roleChecked(USER_TYPE.ADMIN), UsersController.getAllUsers)
 
 /**
- * GET /users/search?search_keyword=
+ * GET /users/search?search_keyword=...
  * @description Search users by keywords (Optional)
+ * Authorization: JWT (Admin Required)
  * Body: None
+ * Response: <application/json>
+ * {
+ *   "status": "success",
+ *   "payload": [
+ *     {
+ *       "id": "",
+ *       "dateModified": {
+ *         "_seconds": ,
+ *         "_nanoseconds":
+ *       },
+ *       "lastName": "",
+ *       "email": "",
+ *       "isActive": ,
+ *       "firstName": "",
+ *       "role": "",
+ *       "dateCreated": {
+ *         "_seconds": ,
+ *         "_nanoseconds":
+ *       }
+ *     },
+ *     ...
+ *   ]
+ * }
  */
-router.get('/search', UsersController.searchUser)
+router.get('/search', roleChecked(USER_TYPE.ADMIN), UsersController.searchUser)
 
 export default router

@@ -56,6 +56,29 @@ export const getUsersByEmail = async (email: string) => {
 }
 
 /**
+ * Search Users from the keyword
+ * @param searchKey {string} The search string from the user (Optional)
+ * @returns The result from searching
+ */
+export const searchUser = async (searchKey: string) => {
+  const searchRegExp = new RegExp(searchKey, 'i')
+  const allUsers = await getAllUsers()
+
+  const filteredUsers = await Promise.all(
+    allUsers.filter((u) => {
+      return (
+        u.firstName?.match(searchRegExp) ||
+        u.lastName?.match(searchRegExp) ||
+        u.displayName?.match(searchRegExp) ||
+        u.email?.match(searchRegExp)
+      )
+    }),
+  )
+
+  return filteredUsers
+}
+
+/**
  * Add user to collection
  * @param userData {Partial<users>} Data of user that would like to add
  * @returns
@@ -86,46 +109,7 @@ export const addUser = async (userData: Partial<IUser>) => {
 }
 
 /**
- * Search Users from the keyword
- * @param searchKey {string} The search string from the user (Optional)
- * @returns The result from searching
- */
-export const searchUser = async (searchKey: string) => {
-  const searchRegExp = new RegExp(searchKey, 'i')
-  const allUsers = await getAllUsers()
-
-  const filteredUsers = await Promise.all(
-    allUsers.filter((u) => {
-      return (
-        u.firstName?.match(searchRegExp) ||
-        u.lastName?.match(searchRegExp) ||
-        u.displayName?.match(searchRegExp) ||
-        u.email?.match(searchRegExp)
-      )
-    }),
-  )
-
-  return filteredUsers
-}
-
-/**
- * Delete the user by id
- * @param uId {string} Id of user that would like to delete
- * @param actionById {string} Id of user who take an action for logging purpose
- * @returns
- */
-export const deleteUsersById = async (uId: string, actionById: string) => {
-  try {
-    const resDel = await deleteDocWithSubCollection(usersRef.doc(uId))
-    logToFirestore(usersRef.doc(actionById), `Delete Account ${uId}`)
-    return resDel
-  } catch (error) {
-    return error.message
-  }
-}
-
-/**
- *
+ * Update User
  * @param uId {string} User id the need to update their profile
  * @param data {Partial<IUser>} New value
  * @returns
@@ -141,5 +125,21 @@ export const updateUser = async (uId: string, data: Partial<IUser>) => {
     return resUpdate
   } catch (error) {
     return error
+  }
+}
+
+/**
+ * Delete the user by id
+ * @param uId {string} Id of user that would like to delete
+ * @param actionById {string} Id of user who take an action for logging purpose
+ * @returns
+ */
+export const deleteUsersById = async (uId: string, actionById: string) => {
+  try {
+    const resDel = await deleteDocWithSubCollection(usersRef.doc(uId))
+    logToFirestore(usersRef.doc(actionById), `Delete Account ${uId}`)
+    return resDel
+  } catch (error) {
+    return error.message
   }
 }

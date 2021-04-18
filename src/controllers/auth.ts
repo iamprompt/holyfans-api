@@ -6,6 +6,10 @@ import { ILoginInfo } from '@/utils/types'
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 
+/**
+ * Login (Log to Firestore)
+ * @returns
+ */
 export const getUserLogin = async (req: Request, res: Response) => {
   const loginInfo = req.body as ILoginInfo
 
@@ -30,11 +34,19 @@ export const getUserLogin = async (req: Request, res: Response) => {
   }
 }
 
+/**
+ * Logout (Require token -> Log to Firestore)
+ * @returns
+ */
 export const logout = async (req: Request, res: Response) => {
   logToFirestore(usersRef.doc(req.userId), ACTION_TYPE.LOGOUT)
   return res.json({ status: RES_STATUS.SUCCESS })
 }
 
+/**
+ * Verify user token from authorization header
+ * @returns
+ */
 export const verifyUserToken = async (
   req: Request,
   res: Response,
@@ -54,7 +66,6 @@ export const verifyUserToken = async (
     }
     req.userId = tokenUser.id
     req.userRole = tokenUser.role
-    console.log(tokenUser)
 
     next()
   } catch (error) {
@@ -64,6 +75,11 @@ export const verifyUserToken = async (
   }
 }
 
+/**
+ * Verify User role whether accessible to the services
+ * @param allowedRole {string[]} Role that allowed in the services
+ * @returns
+ */
 export const roleChecked = (...allowedRole: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
     if (req.userRole && allowedRole.includes(req.userRole)) {
