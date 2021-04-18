@@ -32,6 +32,8 @@ npm run build
 npm start
 ```
 
+**Remark:** To be able to run, please use the provided `.env` file. To be able to access the console please use credential in `holyfansGoolge.txt` If there are any problems, please contact us immediately.
+
 ## Members
 
 - Thanapat Jumnongrat (Palm) ID: 6288018
@@ -113,55 +115,6 @@ We separated in to 3 route:
 ### Route `/auth`
 
 #### Endpoint : POST `/auth/login`
-
-**Method:** GET
-
-This function will make an authorization to the logging session of a user. 
-The service will check for the user credential in the database and then return the user token for the user.
-
-#### Endpoint : `/auth/logout`
-
-This function will delete the JWT token of a user from the website.
-
-#### Endpoint : `/auth/register`
-
-
-
-### Route `/users`
-
-#### Endpoint : `/users/all`
-
-#### Endpoint : `/users?uId=`
-
-#### Endpoint : `/users/search?search_keyword=`
-
-#### Endpoint : `/users/`
-
-#### Endpoint : `/users/`
-
-#### Endpoint : `/users?uId=`
-
-
-### Route `/tellers`
-
-#### Endpoint : `/tellers/all`
-
-**Method:** GET
-
-
-
-#### Endpoint : `/tellers?tId=`
-
-#### Endpoint : `/tellers/search?search_keyword=`
-
-#### Endpoint : `/tellers/`
-
-#### Endpoint : `/tellers/`
-
-#### Endpoint : `/tellers?tId=`
-
-
-
 
 ```JSON
 // Body : <application/json>
@@ -324,7 +277,27 @@ This function will delete the JWT token of a user from the website.
 }
 ```
 
-#### Endpoint : GET `/tellers/search?search_keyword=...&categories=...&area=...&price_range=...`
+#### Endpoint : DELETE `/tellers?tId=...`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+### Route `/users`
+
+#### Endpoint : GET `/users/all`
 
 ```JSON
 // Body : None
@@ -333,12 +306,88 @@ This function will delete the JWT token of a user from the website.
 {
   "status": "success",
   "payload": [{
-    /* Teller Data */
+    /* User Data */
   }]
 }
 ```
 
-#### Endpoint : DELETE `/tellers?tId=`
+#### Endpoint : GET `/users?uId=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* User Data */
+  }
+}
+```
+
+#### Endpoint : GET `/users/search?search_keyword=...`
+
+```JSON
+// Body : None
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": [{
+    /* User Data */
+  }]
+}
+```
+
+#### Endpoint : POST `/users`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "role": "",
+  "firstName": "",
+  "lastName": "",
+  "displayName": "",
+  "email": ""
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    /* User Data */
+  }
+}
+```
+
+#### Endpoint : PUT `/users`
+
+```JSON
+// Authorization : JWT token from login (Requires admin privilege)
+// Body : <application/json>
+{
+  "id": "",
+  "role": "",
+  "firstName": "",
+  "lastName": "",
+  "displayName": "",
+  "email": ""
+}
+
+// Response : <application/json>
+{
+  "status": "success",
+  "payload": {
+    "_writeTime": {
+      "_seconds": ,
+      "_nanoseconds":
+    }
+  }
+}
+```
+
+#### Endpoint : DELETE `/users?uId=...`
 
 ```JSON
 // Authorization : JWT token from login (Requires admin privilege)

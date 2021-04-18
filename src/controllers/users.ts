@@ -121,13 +121,15 @@ export const updateUser = async (req: Request, res: Response) => {
     })
   }
 
-  if (previousU.email !== u.email) {
-    const isEmailUsed = await Users.getUsersByEmail(u.email)
-    if (isEmailUsed) {
-      return res.status(400).json({
-        status: RES_STATUS.ERROR,
-        payload: 'The email has been used',
-      })
+  if (u.email) {
+    if (previousU.email !== u.email) {
+      const isEmailUsed = await Users.getUsersByEmail(u.email)
+      if (isEmailUsed) {
+        return res.status(400).json({
+          status: RES_STATUS.ERROR,
+          payload: 'The email has been used',
+        })
+      }
     }
   }
 

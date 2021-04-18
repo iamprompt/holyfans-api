@@ -18,6 +18,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`)
+  console.log(`${JSON.stringify(req.body)}`)
+  console.log(`${JSON.stringify(req.query)}`)
   next()
 })
 
