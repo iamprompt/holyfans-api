@@ -1,3 +1,129 @@
+// Holy Tellers
+// https://holyfans-api.herokuapp.com/
+// ==================================================================
+
+// GET all tellers
+
+// /tellers/all
+
+// ==================================================================
+
+// GET Tellers by ID
+
+// /tellers?tId=Gw1jaXbRo98vXuA1XmZj
+// /tellers?tId=tdoaer3GLzpa1DhzJq41
+
+// ==================================================================
+
+// GET Search Tellers
+
+// /tellers/search?search_keyword=&categories=Tarot&area=Central&price_range=4
+// /tellers/search?search_keyword=&categories=Candle+prediction&area=Bangkok&price_range=2
+
+// ==================================================================
+
+// POST Create Tellers
+
+// method: POST
+// URL: /tellers
+// body: raw JSON
+// {
+//   "contact": {
+// 	"instagram": "prinnie333",
+// 	"website": "https://prinnie333.com/",
+// 	"youtube": "Prinnie333 Isaria",
+// 	"facebook": "https://www.facebook.com/Prinnie1221/",
+// 	},
+//   "nameTH": "ปรินนี่",
+//   "category": [
+// 	"Tarot"
+// 	],
+//   "address": {
+//     "_latitude": 13.7287778701836, 
+// 	"_longitude": 100.5260142160489
+// 	},
+//   "nameEN": "Prinnie",
+//   "subPrice": 359,
+//   "bio": "หมอดูปรินนี่โดดเด่นด้วยการใช้ศาสตร์แบบผสมผสาน ไม่ว่าจะแบบตะวันตกหรือแบบสมัยใหม่ ระดับอาจารย์ปรินนี่ก็จัดให้ได้หมด ซึ่งทุก ๆ เดือนก็จะมีการเปิดไพ่พยากรณ์ดวงชะตาของแต่ละราศีให้ฟัง ทั้งเรื่องงาน การเงิน ความรัก ที่ใคร ๆ ก็บอกว่าแม่นมาก ลองเข้าไปฟังในยูทูบก่อนได้ เผื่อจะสนใจดูดวงส่วนตัวต่อ",
+//   "region": "Bangkok",
+//   "img": "https://firebasestorage.googleapis.com/v0/b/mu-nakama.appspot.com/o/teller%2Fprofile%2Fprinnie.jpg?alt=media"
+// }
+
+// method: POST
+// URL: /tellers
+// body: raw JSON
+// {
+//   "contact": {
+//     "instagram": "sinsaeming_ig",
+// 	"email": "arjanjackyming@gmail.com",
+//     "facebook": "https://www.facebook.com/Arjan.Jacky.Ming/",
+//   },
+//   "nameTH": "ซินแสหมิง",
+//   "category": [
+//     "Feng Shui"
+//   ],
+//   "address": {
+//     "_latitude": 13.770411242938138,
+//     "_longitude":  100.56982296995835
+//   },
+//   "nameEN": "arjanjackyming",
+//   "subPrice": 219,
+//   "bio": "ซินแสหมิง พงศ์สดายุ นาคทอง ที่หลายคนยกให้เป็นที่ปรึกษาด้านศาสตร์ฮวงจุ้ย การดูโหงวเฮ้ง ใครย้ายบ้านใหม่ ตลอดจนจะไปสักคิ้ว แวะมาดูดวงกับซินแสหมิงก่อนได้เลย ส่วนเรื่องทำนายดวงตามลัคนาราศีก็เริดไม่แพ้กัน มีหลากหลายมาก ทั้งทำนายแบบเบสิก จัดอันดับดวงดีในแต่ละเดือน หาคู่มูเตลู เป็นต้น ใครอยากดูดวงแบบสนุก ๆ ต้องคนนี้เลย",
+//   "region": "Bangkok",
+//   "img": "https://firebasestorage.googleapis.com/v0/b/mu-nakama.appspot.com/o/teller%2Fprofile%2Fming.jpg?alt=media"
+// }
+
+// ==================================================================
+
+// PUT Update Tellers 
+
+// method: PUT
+// URL: /tellers
+// body: raw JSON
+// {
+//   "id": "GMRvJlbc6eTRLXO9SMuD",
+//   "contact": {
+//     "instagram": "@aa"
+//   },
+//   "nameTH": "แม่หมอทับทิม",
+//   "category": [
+//     "Tarot"
+//   ],
+//   "address": {
+//     "_latitude": 13,
+//     "_longitude": 100
+//   },
+//   "nameEN": "Tub",
+//   "subPrice": 113,
+//   "bio": "สวัสดีแม่มด",
+//   "region": "Bangkok",
+//   "img": "https://images.unsplash.com/photo-1618625874408-63028f30b73a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+// }
+
+// method: PUT
+// URL: /tellers
+// body: raw JSON
+// {
+//   "id": "O3ADR0ZvJ2KachFDLI8c",
+//   "contact": {
+//     "instagram": "@KIIKKIMM"
+//   },
+//   "nameTH": "อาจารย์คิม ที่ขื่อใส่ใหม่ก็คือคิมมี่",
+//   "category": [
+//     "Tarot", "Feng Shui"
+//   ],
+//   "address": {
+//     "_latitude": 13,
+//     "_longitude": 100
+//   },
+//   "nameEN": "KIMMY",
+//   "subPrice": 999,
+//   "bio": "นี่คือคิมมี่คนใหม่ไฉไล",
+//   "region": "Bangkok"
+// }
+
+// ==================================================================
+
 import { Router } from 'express'
 import * as TellersController from '@/controllers/tellers'
 import { roleChecked, verifyUserToken } from '@/controllers/auth'
