@@ -32,6 +32,8 @@ npm run build
 npm start
 ```
 
+**Remark:** To be able to run, please use the provided `.env` file. To be able to access the console please use credential in `holyfansGoolge.txt` If there are any problems, please contact us immediately.
+
 ## Members
 
 - Thanapat Jumnongrat (Palm) ID: 6288018
@@ -114,9 +116,6 @@ We separated in to 3 route:
 
 #### Endpoint : POST `/auth/login`
 
-This function will make an authorization to the logging session of a user.
-The service will check for the user credential in the database and then return the user token for the user.
-
 ```JSON
 // Body : <application/json>
 {
@@ -137,8 +136,6 @@ The service will check for the user credential in the database and then return t
 ```
 
 #### Endpoint : POST `/auth/logout`
-
-This function will delete the JWT token of a user from the website.
 
 ```JSON
 // Authorization: JWT token from login

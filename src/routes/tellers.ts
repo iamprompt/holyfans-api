@@ -133,7 +133,7 @@ router.get('/', TellersController.getTellerById)
 // 	"instagram": "prinnie333",
 // 	"website": "https://prinnie333.com/",
 // 	"youtube": "Prinnie333 Isaria",
-// 	"facebook": "https://www.facebook.com/Prinnie1221/",
+// 	"facebook": "https://www.facebook.com/Prinnie1221/"
 // 	},
 //   "nameTH": "ปรินนี่",
 //   "category": [
@@ -158,7 +158,7 @@ router.get('/', TellersController.getTellerById)
 //   "contact": {
 //     "instagram": "sinsaeming_ig",
 // 	   "email": "arjanjackyming@gmail.com",
-//     "facebook": "https://www.facebook.com/Arjan.Jacky.Ming/",
+//     "facebook": "https://www.facebook.com/Arjan.Jacky.Ming/"
 //   },
 //   "nameTH": "ซินแสหมิง",
 //   "category": [
