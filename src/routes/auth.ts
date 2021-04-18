@@ -40,7 +40,6 @@
 // URL: /users
 // body: raw JSON
 // {
-//   "role": "admin",
 //   "firstName": "Supaprompt",
 //   "lastName": "Laorattanaprompt",
 //   "email": "promptudeva@gmail.com",
@@ -51,7 +50,6 @@
 // URL: /users
 // body: raw JSON
 // {
-//   "role": "user",
 //   "firstName": "Jane",
 //   "lastName": "Doe",
 //   "email": "jane@doe.com",

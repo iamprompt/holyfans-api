@@ -121,9 +121,11 @@ The service will check for the user credential in the database and then return t
 
 #### Endpoint : `/auth/logout`
 
-This function will 
+This function will delete the JWT token of a user from the website.
 
 #### Endpoint : `/auth/register`
+
+
 
 ### Route `/users`
 
@@ -143,6 +145,10 @@ This function will
 ### Route `/tellers`
 
 #### Endpoint : `/tellers/all`
+
+**Method:** GET
+
+
 
 #### Endpoint : `/tellers?tId=`
 
