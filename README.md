@@ -114,54 +114,8 @@ We separated in to 3 route:
 
 #### Endpoint : POST `/auth/login`
 
-**Method:** GET
-
-This function will make an authorization to the logging session of a user. 
+This function will make an authorization to the logging session of a user.
 The service will check for the user credential in the database and then return the user token for the user.
-
-#### Endpoint : `/auth/logout`
-
-This function will delete the JWT token of a user from the website.
-
-#### Endpoint : `/auth/register`
-
-
-
-### Route `/users`
-
-#### Endpoint : `/users/all`
-
-#### Endpoint : `/users?uId=`
-
-#### Endpoint : `/users/search?search_keyword=`
-
-#### Endpoint : `/users/`
-
-#### Endpoint : `/users/`
-
-#### Endpoint : `/users?uId=`
-
-
-### Route `/tellers`
-
-#### Endpoint : `/tellers/all`
-
-**Method:** GET
-
-
-
-#### Endpoint : `/tellers?tId=`
-
-#### Endpoint : `/tellers/search?search_keyword=`
-
-#### Endpoint : `/tellers/`
-
-#### Endpoint : `/tellers/`
-
-#### Endpoint : `/tellers?tId=`
-
-
-
 
 ```JSON
 // Body : <application/json>
@@ -183,6 +137,8 @@ This function will delete the JWT token of a user from the website.
 ```
 
 #### Endpoint : POST `/auth/logout`
+
+This function will delete the JWT token of a user from the website.
 
 ```JSON
 // Authorization: JWT token from login
