@@ -60,21 +60,50 @@ export const getUsersByEmail = async (email: string) => {
  * @param searchKey {string} The search string from the user (Optional)
  * @returns The result from searching
  */
-export const searchUser = async (searchKey: string) => {
-  const searchRegExp = new RegExp(searchKey, 'i')
+export const searchUser = async (searchKey: {
+  search_keyword: string
+  role: 'admin' | 'user' | undefined
+  status: 'active' | 'inactive' | undefined
+}) => {
+  const searchRegExp = new RegExp(searchKey.search_keyword, 'i')
   const allUsers = await getAllUsers()
 
-  const filteredUsers = await Promise.all(
-    allUsers.filter((u) => {
-      return (
-        u.firstName?.match(searchRegExp) ||
-        u.lastName?.match(searchRegExp) ||
-        u.displayName?.match(searchRegExp) ||
-        u.email?.match(searchRegExp)
-      )
-    }),
-  )
+  let filteredUsers: Partial<IUser>[] = allUsers
 
+  if (searchKey.role) {
+    filteredUsers = await Promise.all(
+      filteredUsers.filter((u) => {
+        return u.role === searchKey.role
+      }),
+    )
+  }
+
+  if (searchKey.status) {
+    filteredUsers = await Promise.all(
+      filteredUsers.filter((u) => {
+        if (searchKey.status === 'active') {
+          return u.isActive
+        }
+
+        if (searchKey.status === 'inactive') {
+          return !u.isActive
+        }
+      }),
+    )
+  }
+
+  if (searchRegExp) {
+    filteredUsers = await Promise.all(
+      filteredUsers.filter((u) => {
+        return (
+          u.firstName?.match(searchRegExp) ||
+          u.lastName?.match(searchRegExp) ||
+          u.displayName?.match(searchRegExp) ||
+          u.email?.match(searchRegExp)
+        )
+      }),
+    )
+  }
   return filteredUsers
 }
 

@@ -42,10 +42,16 @@ export const getUserById = async (req: Request, res: Response) => {
  * @returns
  */
 export const searchUser = async (req: Request, res: Response) => {
-  const searchParams = req.query.search_keyword as string
+  const { query } = req
   return res.status(200).json({
     status: RES_STATUS.SUCCESS,
-    payload: await Users.searchUser(searchParams as string),
+    payload: await Users.searchUser(
+      query as {
+        search_keyword: string
+        role: 'admin' | 'user'
+        status: 'active' | 'inactive'
+      },
+    ),
   })
 }
 

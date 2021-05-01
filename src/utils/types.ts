@@ -11,6 +11,7 @@ export type IUser = {
   altDisplayName?: string
   email: string
   password: string
+  isActive: boolean
   dateCreated: admin.firestore.Timestamp
   dateModified: admin.firestore.Timestamp
 }
