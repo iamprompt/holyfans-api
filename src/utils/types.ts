@@ -56,4 +56,5 @@ export type ITellerPost = {
   img?: string
   content?: string
   dateCreated?: admin.firestore.Timestamp
+  dateModified?: admin.firestore.Timestamp
 }

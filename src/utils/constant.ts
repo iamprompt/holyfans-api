@@ -20,6 +20,7 @@ export enum ACTION_TYPE {
   CREATE_ACC = 'Create account',
   LOGIN = 'Login',
   LOGOUT = 'Logout',
+  CREATE_POST = 'Create Post',
 }
 
 export const BCRYPT_SALT = 8
