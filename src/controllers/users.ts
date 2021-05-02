@@ -87,9 +87,10 @@ export const createUsers = async (req: Request, res: Response) => {
     const response = (await Users.addUser(uRequestData)) as IUser
     const token = await Auth.generateUserToken(response)
     delete response.password
-    return res
-      .status(200)
-      .json({ status: RES_STATUS.SUCCESS, payload: { token, ...response } })
+    return res.status(200).json({
+      status: RES_STATUS.SUCCESS,
+      payload: { token, user: { ...response } },
+    })
   } catch (error) {
     return res
       .status(400)

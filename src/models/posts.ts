@@ -8,7 +8,7 @@ export const tellerRef = db.collection(FIREBASE_CONST.TELLER_COLLECTION)
 export const postsRef = db.collectionGroup('posts')
 
 export const getAllPosts = async () => {
-  const postsSnapshot = await postsRef.get()
+  const postsSnapshot = await postsRef.orderBy('dateCreated', 'desc').get()
   const data = await Promise.all(
     postsSnapshot.docs.map(async (t) => {
       const p = await t.ref.parent.parent.get()
