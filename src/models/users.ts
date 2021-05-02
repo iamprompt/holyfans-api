@@ -10,7 +10,7 @@ export const usersRef = db.collection(FIREBASE_CONST.USERS_COLLECTION)
  * @returns
  */
 export const getAllUsers = async () => {
-  const usersSnapshot = await usersRef.get()
+  const usersSnapshot = await usersRef.orderBy('dateCreated', 'desc').get()
   const data = await Promise.all(
     usersSnapshot.docs.map((u) => {
       const d = u.data()
